@@ -1,0 +1,11 @@
+{
+  "name": "rhia",
+  "owner": { "name": "RHIA" },
+  "plugins": [
+    {
+      "name": "rhia-dossier",
+      "source": "./plugins/rhia-dossier",
+      "description": "Análisis de idoneidad + dossier de verificación de UNA hoja de vida, como Artifact. Corre con Claude (lee el PDF), sin API externa; sirve en desktop, web y celular."
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "rhia-dossier",
+  "version": "0.1.0",
+  "description": "Genera análisis de idoneidad + dossier de verificación de una HV y lo publica como Artifact. Motor: Claude (lee el PDF). Para HV individual (no lotes/maestro/torre).",
+  "author": { "name": "RHIA" }
+}

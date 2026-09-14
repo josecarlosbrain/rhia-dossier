@@ -1,0 +1,84 @@
+<!-- Plantilla de referencia para el Artifact (una HV: Análisis + Dossier).
+     Escribí el contenido directamente (sin <html>/<head>/<body>: el harness los envuelve).
+     Poné un <title> con el nombre del candidato. Theme-aware (light/dark). Un solo archivo.
+     Reemplazá los @PLACEHOLDER@ y repetí los bloques de lista según el caso. -->
+<title>@NOMBRE@ — Idoneidad</title>
+<style>
+:root{--ink:#20242c;--muted:#5f6878;--paper:#f7f8fa;--panel:#fff;--line:#d8dde6;
+  --blue:#003893;--yellow:#fcd116;--red:#ce1126;--ok:#1d7a46;--warn:#9a6700;
+  --serif:Georgia,serif;--sans:"Segoe UI",system-ui,Arial,sans-serif}
+:root:not([data-theme="light"]){}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#e6e9ef;--muted:#9aa4b2;--paper:#0f1420;--panel:#161c28;--line:#28303f}}
+:root[data-theme="dark"]{--ink:#e6e9ef;--muted:#9aa4b2;--paper:#0f1420;--panel:#161c28;--line:#28303f}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5}
+.hero{position:relative;background:var(--panel);padding:32px 22px 22px;border-bottom:1px solid var(--line)}
+.hero::before{content:"";position:absolute;top:0;left:0;right:0;height:10px;background:linear-gradient(90deg,var(--yellow) 0 50%,var(--blue) 50% 75%,var(--red) 75% 100%)}
+.in{max-width:900px;margin:0 auto}
+.kicker{color:var(--blue);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:11px;margin:0 0 6px}
+h1{margin:0;color:var(--blue);font-family:var(--serif);font-weight:400;font-size:clamp(22px,4vw,34px)}
+.sub{color:var(--muted);margin:8px 0 0;font-size:14px}
+main{max-width:900px;margin:0 auto;padding:22px}
+h2{color:var(--blue);font-family:var(--serif);font-weight:400;font-size:22px;border-bottom:2px solid var(--yellow);padding-bottom:6px;margin:26px 0 12px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px 18px;margin:12px 0}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:12px}
+.tag.ok{background:#e6f4ea;color:var(--ok)}.tag.warn{background:#fff4e5;color:var(--warn)}.tag.no{background:#fdecec;color:var(--red)}.tag.info{background:#eef1f6;color:var(--muted)}
+.score{font-family:var(--serif);font-size:30px;color:var(--blue);font-weight:700}
+.bars{display:grid;gap:8px;margin:8px 0}
+.bar{display:grid;grid-template-columns:120px 1fr 42px;gap:8px;align-items:center;font-size:13px}
+.track{background:var(--line);border-radius:6px;height:10px;overflow:hidden}.fill{height:100%;background:var(--blue)}
+ul{margin:6px 0;padding-left:20px}li{margin:3px 0}
+.flag{color:var(--red)}.pend{color:var(--warn)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.k{color:var(--muted);font-size:12px}.v{font-weight:600}
+.callout{background:#fff8e1;border:1px solid #f3e2a9;border-left:5px solid var(--yellow);border-radius:6px;padding:12px 14px;font-size:13px;color:#5b5320;margin-top:16px}
+:root:not([data-theme="light"]) .callout,@media(prefers-color-scheme:dark){.callout{background:#2a2612;color:#e9dca9;border-color:#5b5320}}
+footer{max-width:900px;margin:0 auto;padding:0 22px 36px;color:var(--muted);font-size:12px}
+.table-wrap{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-weight:600}
+</style>
+<header class="hero"><div class="in">
+  <p class="kicker">RHIA · Idoneidad de aspirantes</p>
+  <h1>@NOMBRE@</h1>
+  <p class="sub">@CARGO_O_GENERAL@ · cédula @CEDULA_ENMASCARADA@ · <span class="tag @CLS@">@CONCEPTO@ @PUNTAJE@</span></p>
+</div></header>
+<main>
+
+  <h2>Análisis de idoneidad</h2>
+  <div class="panel">
+    <p><b>Requisito mínimo:</b> @RESULTADO@ — @VIA@. @PARRAFO_CONCEPTO@</p>
+    <!-- contraste requisito↔HV (omitir si no hay cargo) -->
+    <div class="table-wrap"><table><thead><tr><th>Requisito</th><th>En la HV</th><th>Match</th></tr></thead>
+    <tbody>@FILAS_CONTRASTE@</tbody></table></div>
+  </div>
+  <div class="panel">
+    <b>Ajuste al cargo (informativo)</b> · <span class="score">@PUNTAJE@</span>/100
+    <div class="bars">
+      <div class="bar"><span>Pertinencia</span><span class="track"><span class="fill" style="width:@P_PCT@%"></span></span><span>@P_PERT@/40</span></div>
+      <div class="bar"><span>Experiencia</span><span class="track"><span class="fill" style="width:@E_PCT@%"></span></span><span>@P_EXP@/25</span></div>
+      <div class="bar"><span>Soporte</span><span class="track"><span class="fill" style="width:@S_PCT@%"></span></span><span>@P_SOP@/20</span></div>
+      <div class="bar"><span>Arraigo</span><span class="track"><span class="fill" style="width:@A_PCT@%"></span></span><span>@P_ARR@/15</span></div>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="panel"><b>Resumen de la HV</b><ul>@LI_RESUMEN@</ul></div>
+    <div class="panel"><b>Fortalezas</b><ul>@LI_FORTALEZAS@</ul></div>
+    <div class="panel"><b>Brechas / a verificar</b><ul>@LI_BRECHAS@</ul></div>
+    <div class="panel"><b>Banderas</b><ul>@LI_BANDERAS@</ul></div>
+  </div>
+
+  <h2>Dossier de verificación</h2>
+  <div class="panel grid2">
+    <div><div class="k">Sujeto</div><div class="v">@NOMBRE@ · @CEDULA_ENMASCARADA@</div></div>
+    <div><div class="k">Estado de identidad</div><div class="v">@ESTADO_IDENTIDAD@</div></div>
+    <div><div class="k">Ubicación / jurisdicción</div><div class="v">@UBICACION@</div></div>
+    <div><div class="k">Período de referencia</div><div class="v">@PERIODO@</div></div>
+    <div><div class="k">Nivel de riesgo</div><div class="v"><span class="tag @RCLS@">@RIESGO@</span></div></div>
+  </div>
+  <div class="panel"><b>Justificación del riesgo</b><p>@RIESGO_TEXTO@</p></div>
+  <div class="panel"><b>Resumen de hallazgos</b><ul>@LI_HALLAZGOS@</ul></div>
+  <div class="panel"><b>Homónimos / identidad</b><p>@HOMONIMOS@</p></div>
+  <div class="panel"><b>Verificaciones pendientes (canal formal)</b><ul class="pend">@LI_PENDIENTES@</ul></div>
+  <div class="panel"><b>Fuentes</b><ul>@LI_FUENTES@</ul></div>
+
+  <div class="callout">Evaluación de apoyo generada por RHIA sobre la HV aportada. El concepto es una señal; <b>la decisión final es humana</b>. Antecedentes/inhabilidades se confirman por canal formal; no se sentencian aquí. Datos personales minimizados.</div>
+</main>
+<footer>Generado por RHIA (skill rhia-dossier) — @FECHA@.</footer>
